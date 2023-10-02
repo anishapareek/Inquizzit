@@ -56,15 +56,39 @@
 		F8325C9D2AC9BED4002255D5 /* Inquizzit */ = {
 			isa = PBXGroup;
 			children = (
+				F8325CB42ACAC3A6002255D5 /* Controllers */,
+				F8325CB32ACAC39D002255D5 /* Views */,
+				F8325CB22ACAC393002255D5 /* Models */,
 				F8325C9E2AC9BED4002255D5 /* AppDelegate.swift */,
 				F8325CA02AC9BED4002255D5 /* SceneDelegate.swift */,
-				F8325CA22AC9BED4002255D5 /* ViewController.swift */,
-				F8325CA42AC9BED4002255D5 /* Main.storyboard */,
 				F8325CA72AC9BED6002255D5 /* Assets.xcassets */,
 				F8325CA92AC9BED6002255D5 /* LaunchScreen.storyboard */,
 				F8325CAC2AC9BED6002255D5 /* Info.plist */,
 			);
 			path = Inquizzit;
+			sourceTree = "<group>";
+		};
+		F8325CB22ACAC393002255D5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F8325CB32ACAC39D002255D5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F8325CA42AC9BED4002255D5 /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F8325CB42ACAC3A6002255D5 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F8325CA22AC9BED4002255D5 /* ViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
