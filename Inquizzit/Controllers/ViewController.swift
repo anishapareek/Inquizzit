@@ -17,9 +17,18 @@ class ViewController: UIViewController, QuizProtocol {
     var questions = [Question]()
     var currentQuestionIndex = 0
     var numCorrect = 0
+    
+    var resultDialog: ResultViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Initializa the result dialog
+        resultDialog = storyboard?.instantiateViewController(withIdentifier: "ResultVC") as? ResultViewController
+        resultDialog?.modalPresentationStyle = .overCurrentContext
+        
+        // Set self as the delegate for the Result view controller protocol
+        resultDialog?.delegate = self
         
         // Set self as the delegate and datasource for the tableview
         optionsTableView.delegate = self
@@ -57,6 +66,42 @@ class ViewController: UIViewController, QuizProtocol {
         
         // Display the first question
         displayQuestion()
+    }
+}
+
+extension ViewController: ResultViewControllerProtocol {
+    
+    func dialogDismissed() {
+        
+        // Increment the currentQuestionIndex
+        currentQuestionIndex += 1
+        
+        if currentQuestionIndex == questions.count {
+            
+            // The user has just answered the last question
+            // Show a summary dialog
+            if let resultDialog {
+                
+                // Customize the dialog text
+                resultDialog.titleText = "Summary"
+                resultDialog.feedbackText = "You got \(numCorrect) correct out of \(questions.count) questions"
+                resultDialog.buttonText = "Restart"
+                present(resultDialog, animated: true)
+            }
+        }
+        else if currentQuestionIndex > questions.count {
+            
+            // Restart
+            numCorrect = 0
+            currentQuestionIndex = 0
+            displayQuestion()
+        }
+        else if currentQuestionIndex < questions.count {
+            
+            // We have more questions to show
+            // Display the next question
+            displayQuestion()
+        }
     }
 }
 
@@ -110,6 +155,8 @@ extension ViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        var titleText = ""
+        
         // User has tapped on a row, check if it's the right answer
         let question = questions[currentQuestionIndex]
         
@@ -117,17 +164,25 @@ extension ViewController: UITableViewDelegate {
             if indexPath.row == correctAnswerIndex {
                 
                 // User got it right
+                titleText = "Correct!"
+                numCorrect += 1
             }
             else {
                 
                 // User got it wrong
+                titleText = "Wrong!"
             }
             
-            // Increment the currentQuestionIndex
-            currentQuestionIndex += 1
-            
-            // Display the next question
-            displayQuestion()
+            // Show the pop-up
+            if let resultDialog {
+                
+                // Customize the dialog text
+                resultDialog.titleText = titleText
+                resultDialog.feedbackText = question.feedback ?? ""
+                resultDialog.buttonText = "Next"
+                present(resultDialog, animated: true)
+            }
+
         }
         else {
             fatalError("ERROR: The correct answer index parameter is nil")
