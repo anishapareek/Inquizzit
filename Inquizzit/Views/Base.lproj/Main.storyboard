@@ -22,7 +22,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Ags-Ce-CYs">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="818"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IVd-3G-LNx">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IVd-3G-LNx">
                                         <rect key="frame" x="20" y="0.0" width="353" height="409"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -92,6 +92,9 @@
                     <connections>
                         <outlet property="optionsTableView" destination="Gmk-LL-zwB" id="fJ0-BE-nr8"/>
                         <outlet property="questionLabel" destination="IVd-3G-LNx" id="CuL-gV-EqA"/>
+                        <outlet property="rootStackView" destination="Ags-Ce-CYs" id="jD7-2D-p6P"/>
+                        <outlet property="stackViewLeadingConstraint" destination="s1u-ZW-9vu" id="Leb-1Q-sWv"/>
+                        <outlet property="stackViewTrailingConstraint" destination="83K-tz-ZUw" id="jEg-Hl-tNI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -108,11 +111,14 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rC6-Sa-rCt" userLabel="DimView">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hG0-dL-m45" userLabel="DialogView">
                                 <rect key="frame" x="40" y="159" width="313" height="559"/>
                                 <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dimViewBackground" translatesAutoresizingMaskIntoConstraints="NO" id="nMO-af-kLb">
+                                        <rect key="frame" x="0.0" y="0.0" width="313" height="559"/>
+                                    </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="MOb-vI-ZiW">
                                         <rect key="frame" x="50" y="50" width="213" height="459"/>
                                         <subviews>
@@ -146,9 +152,13 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="MOb-vI-ZiW" secondAttribute="bottom" constant="50" id="LMY-gP-Pbr"/>
+                                    <constraint firstAttribute="trailing" secondItem="nMO-af-kLb" secondAttribute="trailing" id="Mv5-U4-4s6"/>
+                                    <constraint firstItem="nMO-af-kLb" firstAttribute="top" secondItem="hG0-dL-m45" secondAttribute="top" id="P7o-LJ-qEa"/>
+                                    <constraint firstAttribute="bottom" secondItem="nMO-af-kLb" secondAttribute="bottom" id="P96-Mx-ouD"/>
                                     <constraint firstItem="MOb-vI-ZiW" firstAttribute="top" secondItem="hG0-dL-m45" secondAttribute="top" constant="50" id="gTm-jW-I2w"/>
                                     <constraint firstAttribute="trailing" secondItem="MOb-vI-ZiW" secondAttribute="trailing" constant="50" id="sJi-X3-rnZ"/>
                                     <constraint firstItem="MOb-vI-ZiW" firstAttribute="leading" secondItem="hG0-dL-m45" secondAttribute="leading" constant="50" id="u0D-wF-6Kv"/>
+                                    <constraint firstItem="nMO-af-kLb" firstAttribute="leading" secondItem="hG0-dL-m45" secondAttribute="leading" id="y2i-5j-7Q1"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -167,6 +177,7 @@
                     </view>
                     <connections>
                         <outlet property="dialogView" destination="hG0-dL-m45" id="f2e-6v-coq"/>
+                        <outlet property="dialogViewBackgroundImage" destination="nMO-af-kLb" id="NG8-ff-21l"/>
                         <outlet property="dimView" destination="rC6-Sa-rCt" id="hFZ-nk-SuI"/>
                         <outlet property="dismissButton" destination="pyT-4K-an7" id="keA-ji-9ae"/>
                         <outlet property="feedbackLabel" destination="nfR-bh-XSH" id="bW6-xH-SlO"/>
@@ -180,6 +191,7 @@
     </scenes>
     <resources>
         <image name="BackgroundImage" width="375" height="667"/>
+        <image name="dimViewBackground" width="417" height="626"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

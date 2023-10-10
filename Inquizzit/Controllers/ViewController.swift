@@ -13,6 +13,12 @@ class ViewController: UIViewController, QuizProtocol {
     
     @IBOutlet weak var optionsTableView: UITableView!
     
+    @IBOutlet weak var stackViewLeadingConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var stackViewTrailingConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var rootStackView: UIStackView!
+    
     var model = QuizModel()
     var questions = [Question]()
     var currentQuestionIndex = 0
@@ -56,6 +62,46 @@ class ViewController: UIViewController, QuizProtocol {
         
         // Reload the table view
         optionsTableView.reloadData()
+        
+        // Animate the question in
+        slideInQuestion()
+    }
+    
+    // MARK: - Animation methods
+    func slideInQuestion() {
+        
+        // Set the initial state
+        stackViewLeadingConstraint.constant = 1000
+        stackViewTrailingConstraint.constant = -1000
+        rootStackView.alpha = 0
+        view.layoutIfNeeded()
+        
+        // Animate it to the end state
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
+            
+            self.stackViewLeadingConstraint.constant = 0
+            self.stackViewTrailingConstraint.constant = 0
+            self.rootStackView.alpha = 1
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func slideOutQuestion() {
+        
+        // Set the initial state
+        stackViewLeadingConstraint.constant = 0
+        stackViewTrailingConstraint.constant = 0
+        rootStackView.alpha = 1
+        view.layoutIfNeeded()
+        
+        // Animate it to the end state
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
+            
+            self.stackViewLeadingConstraint.constant = -1000
+            self.stackViewTrailingConstraint.constant = 1000
+            self.rootStackView.alpha = 0
+            self.view.layoutIfNeeded()
+        }
     }
     
     // MARK: - Quiz Protocol Methods
@@ -195,6 +241,11 @@ extension ViewController: UITableViewDelegate {
                 
                 // User got it wrong
                 titleText = "Wrong!"
+            }
+            
+            // Slide out the question
+            DispatchQueue.main.async {
+                self.slideOutQuestion()
             }
             
             // Show the pop-up
