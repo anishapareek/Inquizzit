@@ -17,6 +17,7 @@
 		F8325CB82ACAC5CC002255D5 /* QuizModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8325CB72ACAC5CC002255D5 /* QuizModel.swift */; };
 		F8325CBA2ACAE9F2002255D5 /* QuestionData.json in Resources */ = {isa = PBXBuildFile; fileRef = F8325CB92ACAE9F2002255D5 /* QuestionData.json */; };
 		F8325CBC2AD43B3E002255D5 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8325CBB2AD43B3D002255D5 /* ResultViewController.swift */; };
+		F8325CC02AD58B07002255D5 /* StateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8325CBF2AD58B07002255D5 /* StateManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		F8325CB72ACAC5CC002255D5 /* QuizModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizModel.swift; sourceTree = "<group>"; };
 		F8325CB92ACAE9F2002255D5 /* QuestionData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = QuestionData.json; sourceTree = "<group>"; };
 		F8325CBB2AD43B3D002255D5 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		F8325CBF2AD58B07002255D5 /* StateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			children = (
 				F8325CA22AC9BED4002255D5 /* ViewController.swift */,
 				F8325CBB2AD43B3D002255D5 /* ResultViewController.swift */,
+				F8325CBF2AD58B07002255D5 /* StateManager.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -178,6 +181,7 @@
 				F8325CA32AC9BED4002255D5 /* ViewController.swift in Sources */,
 				F8325CB62ACAC473002255D5 /* Question.swift in Sources */,
 				F8325C9F2AC9BED4002255D5 /* AppDelegate.swift in Sources */,
+				F8325CC02AD58B07002255D5 /* StateManager.swift in Sources */,
 				F8325CA12AC9BED4002255D5 /* SceneDelegate.swift in Sources */,
 				F8325CB82ACAC5CC002255D5 /* QuizModel.swift in Sources */,
 				F8325CBC2AD43B3E002255D5 /* ResultViewController.swift in Sources */,
