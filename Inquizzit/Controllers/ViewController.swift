@@ -64,6 +64,22 @@ class ViewController: UIViewController, QuizProtocol {
         // Get a reference to the questions
         self.questions = questions
         
+        // Check if we should restore the state before showing question #1
+        let savedIndex = StateManager.retrieveValue(key: StateManager.questionIndexKey) as? Int
+        
+        if savedIndex != nil && savedIndex! < questions.count {
+            
+            // Set the current question to the saved index
+            currentQuestionIndex = savedIndex!
+            
+            // Retrieve the number of correctly answered questions from storage
+            let numCorrectSaved = StateManager.retrieveValue(key: StateManager.numCorrectKey) as? Int
+            
+            if let numCorrectSaved {
+                numCorrect = numCorrectSaved
+            }
+        }
+        
         // Display the first question
         displayQuestion()
     }
@@ -87,8 +103,12 @@ extension ViewController: ResultViewControllerProtocol {
                 resultDialog.feedbackText = "You got \(numCorrect) correct out of \(questions.count) questions"
                 resultDialog.buttonText = "Restart"
                 present(resultDialog, animated: true)
+                
+                // Clear state
+                StateManager.clearState()
             }
         }
+        
         else if currentQuestionIndex > questions.count {
             
             // Restart
@@ -96,11 +116,15 @@ extension ViewController: ResultViewControllerProtocol {
             currentQuestionIndex = 0
             displayQuestion()
         }
+        
         else if currentQuestionIndex < questions.count {
             
             // We have more questions to show
             // Display the next question
             displayQuestion()
+            
+            // Save state
+            StateManager.saveState(numCorrect: numCorrect, questionIndex: currentQuestionIndex)
         }
     }
 }
@@ -180,7 +204,10 @@ extension ViewController: UITableViewDelegate {
                 resultDialog.titleText = titleText
                 resultDialog.feedbackText = question.feedback ?? ""
                 resultDialog.buttonText = "Next"
-                present(resultDialog, animated: true)
+                
+                DispatchQueue.main.async {
+                    self.present(resultDialog, animated: true)
+                }
             }
 
         }
